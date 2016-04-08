@@ -40,20 +40,19 @@ router.delete('/deleteuser/:id', function(req, res) {
 });
 
 app.put("/updateuser/:id", function(req, res) {
-    console.log(req.body);
+    //console.log(req.body);
     var db = req.db;
     var collection = db.get('userlist');
     var userToDelete = req.params.id;
-    //By default, findOneAndUpdate replaces the record with the update.
-    //So, here, need to use $set parameter to specify we want to update only the fields given.
-    db.collection("flowers").findOneAndUpdate(filter, update, function(err, result) {
+
+    collection.update({ '_id' : userToDelete }, function(err, result) {
         if (err) {
-            console.log("Error when updating color " + err);
-            return res.sendStatus(500);
+            console.log("Error when updating user " + err);
+            res.sendStatus(500);
         } else {
-            console.log("Updated - result: " + result)
-            return res.send({"color" : req.body.color});
-            //Send the updated color back. AJAX is expecting a response.
+            console.log("Updated - result: " + result);
+            res.send((err === null)? { msg: '' } : { msg:'error: ' + err });
+            //Send the updated. AJAX is expecting a response.
         }
     });
 });
