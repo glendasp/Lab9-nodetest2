@@ -4,8 +4,9 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-// Database
-var mongo = require('mongodb');
+
+// Setting Database access
+var MongoClient = require('mongodb').MongoClient;
 var monk = require('monk');
 var db = monk('localhost:27017/nodetest2');
 
