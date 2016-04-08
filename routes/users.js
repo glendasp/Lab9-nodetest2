@@ -40,10 +40,10 @@ router.delete('/deleteuser/:id', function(req, res) {
 });
 
 app.put("/updateuser/:id", function(req, res) {
-    //Filter is the flower with the given name
     console.log(req.body);
-    var filter = { "name" : req.body.name }
-    var update = { $set : req.body } ;
+    var db = req.db;
+    var collection = db.get('userlist');
+    var userToDelete = req.params.id;
     //By default, findOneAndUpdate replaces the record with the update.
     //So, here, need to use $set parameter to specify we want to update only the fields given.
     db.collection("flowers").findOneAndUpdate(filter, update, function(err, result) {
