@@ -39,7 +39,8 @@ router.delete('/deleteuser/:id', function(req, res) {
     });
 });
 
-app.put("/updateuser/:id", function(req, res) {
+
+router.put('/updateuser/:id', function(req, res) {
     //console.log(req.body);
     var db = req.db;
     var collection = db.get('userlist');
@@ -56,8 +57,5 @@ app.put("/updateuser/:id", function(req, res) {
         }
     });
 });
-
-
-
 
 module.exports = router;
